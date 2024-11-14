@@ -1,171 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACT II - The Future of AI</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!doctype html>
+<html>
+	<head>
+		<title>Matrix digital rain</title>
+		<meta charset="utf-8" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+		<style>
+			@supports (padding-top: env(safe-area-inset-top)) {
+				body {
+					padding: 0;
+					height: calc(100% + env(safe-area-inset-top));
+				}
+			}
+			body {
+				background: black;
+				overflow: hidden;
+				margin: 0;
 
-        /* General Body Styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #111; /* Dark background */
-            color: #fff; /* White text */
-            line-height: 1.6;
-            padding: 0;
-            overflow: hidden;
-            font-size: 12px; /* Default font size */
-            text-align: center;
-        }
+				font-family: monospace;
+				font-size: 2em;
+				text-align: center;
+			}
 
-        /* Matrix Effect Styling */
-        #matrix {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            pointer-events: none;
-        }
+			canvas {
+				width: 100vw;
+				height: 100vh;
+			}
 
-        .column {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 100%;
-        }
+			p {
+				color: hsl(108, 90%, 70%);
+				text-shadow: hsl(108, 90%, 40%) 1px 0 10px;
+			}
 
-        .digit {
-            position: absolute;
-            bottom: 0;
-            font-size: 20px;
-            opacity: 0;
-            animation: fall 1s infinite linear;
-        }
+			.notice {
+				margin-top: 10em;
+				animation: fadeInAnimation ease 3s;
+				animation-iteration-count: 1;
+				animation-fill-mode: forwards;
+			}
 
-        @keyframes fall {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
+			@keyframes fadeInAnimation {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
 
-        /* Content Styling */
-        .content {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-            margin-top: 10%;
-        }
+			.pill {
+				display: inline-block;
+				background: gray;
+				border: 0.3em solid lightgray;
+				font-size: 1rem;
+				font-family: monospace;
+				color: white;
+				padding: 0.5em 1em;
+				border-radius: 2em;
+				min-width: 6rem;
+				margin: 3em;
+				text-decoration: none;
+				cursor: pointer;
+				text-transform: uppercase;
+				font-weight: bold;
+			}
 
-        h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
+			.blue {
+				background: linear-gradient(skyblue, blue, black, black, darkblue);
+				border-color: darkblue;
+				color: lightblue;
+			}
 
-        p {
-            font-size: 1.2em;
-            margin: 20px 0;
-            line-height: 1.7;
-        }
+			.blue:hover {
+				border-color: blue;
+				color: white;
+			}
 
-        .highlight {
-            color: #ffffff;
-            font-weight: bold;
-        }
+			.red {
+				background: linear-gradient(lightpink, crimson, black, black, darkred);
+				border-color: darkred;
+				color: lightpink;
+			}
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.5em;
-            }
+			.red:hover {
+				border-color: crimson;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			This is an implementation of the green code seen in The Matrix film and video game franchise.
+			This project demonstrates five concepts:
+					1. Drawing to floating point frame buffer objects, or 'FBO's,
+						 for performing computation and post-processing
+					2. GPU-side computation, with fragment shaders
+						 updating two alternating FBOs
+					3. Rendering crisp "vector" graphics, with a multiple-channel
+						 signed distance field (or 'MSDF')
+					4. Creating a blur/bloom effect from a texture pyramid
+					5. Color mapping with noise, to hide banding
 
-            p {
-                font-size: 1em;
-            }
-        }
-
-    </style>
-</head>
-<body>
-    <div id="matrix"></div>
-    <div class="content">
-        <h1>The Future of AI: $ACTII</h1>
-        <p>
-            The AI Community Token II (<span class="highlight">$ACTII</span>) is more than just a token; it’s the next chapter in an evolving story—a movement that unites technology, community, and the shared vision of a future shaped by collective intelligence. Building on the momentum of the original, <span class="highlight">$ACTII</span> represents a fresh opportunity, where both seasoned members and new participants can contribute to a vibrant ecosystem powered by artificial intelligence and decentralized collaboration.
-        </p>
-        <p>
-            <span class="highlight">$ACTII</span> isn’t just a continuation; it’s an evolution that pushes the boundaries of what a community-driven project can achieve. The AI Community Token II serves as a catalyst, empowering the community to engage in AI innovation, creative projects, and educational initiatives that anyone can be a part of. With <span class="highlight">$ACTII</span>, the community gains access to a unique platform where AI meets the collaborative spirit of decentralized networks, turning ideas into reality and inviting everyone to participate in a movement with global potential.
-        </p>
-        <p>
-            At its core, <span class="highlight">$ACTII</span> embodies the values of openness, creativity, and empowerment. It’s designed to be accessible, ensuring that AI knowledge and opportunities are available to all, regardless of background. By leveraging the token, community members can unlock new experiences, contribute to shared goals, and be part of a story that is constantly being written by the people who believe in it.
-        </p>
-        <p>
-            This next chapter with <span class="highlight">$ACTII</span> invites anyone with a vision, curiosity, or passion for AI to join in. It’s an open call to those who see technology as a tool for growth, change, and connection. As <span class="highlight">$ACTII</span> continues to grow, it brings the community along, creating a movement that’s as dynamic and evolving as the technology it champions. This isn’t just about owning a token; it’s about being part of a journey where every voice matters and every contribution shapes the path forward.
-        </p>
-        <p>
-            The future of <span class="highlight">$ACTII</span> is bright, and this is just the beginning. Will you join us in writing the next chapter?
-        </p>
-    </div>
-
-    <script>
-        // Matrix Digital Rain Effect
-        const matrixContainer = document.getElementById('matrix');
-        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+";
-        const numColumns = Math.floor(window.innerWidth / 20);
-        const numRows = Math.floor(window.innerHeight / 20);
-
-        function createColumn(xPosition) {
-            const column = document.createElement('div');
-            column.classList.add('column');
-            column.style.left = `${xPosition * 20}px`;
-
-            for (let i = 0; i < numRows; i++) {
-                const digit = document.createElement('div');
-                digit.classList.add('digit');
-                digit.textContent = chars[Math.floor(Math.random() * chars.length)];
-                column.appendChild(digit);
-            }
-
-            matrixContainer.appendChild(column);
-            animateColumn(column);
-        }
-
-        function animateColumn(column) {
-            const digits = column.getElementsByClassName('digit');
-            let currentDigit = 0;
-            setInterval(() => {
-                digits[currentDigit].style.animationDuration = `${Math.random() * 2 + 0.5}s`;
-                digits[currentDigit].style.bottom = `${Math.random() * window.innerHeight}px`;
-                currentDigit = (currentDigit + 1) % digits.length;
-            }, 50);
-        }
-
-        for (let i = 0; i < numColumns; i++) {
-            createColumn(i);
-        }
-
-        // Resize the columns on window resize
-        window.onresize = () => {
-            matrixContainer.innerHTML = ''; // Clear current columns
-            const newNumColumns = Math.floor(window.innerWidth / 20);
-            for (let i = 0; i < newNumColumns; i++) {
-                createColumn(i);
-            }
-        };
-    </script>
-</body>
+			For more information, please visit: https://github.com/Rezmason/matrix
+		 -->
+		<script type="module" src="js/main.js"></script>
+	</body>
 </html>
